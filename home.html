@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Welcome to the Home Page</h1>
+<p>Welcome to GigX Platform. Here you can find or create gig according to your role.</p>
+
+{% if user.is_authenticated and user.role == "Provider" %}
+    <a href="{% url 'create_gig' %}" class="button">+ Create New Gig</a>
+{% endif %}
+
+<h2>Available Gigs</h2>
+<ul>
+    {% for gig in gigs %}
+        <li>
+            <a href="{% url 'gig_detail' gig.id %}">{{ gig.title }}</a>
+            - {{ gig.description|truncatewords:15 }}
+            <span style="color: #888;">({{ gig.date }})</span>
+        </li>
+    {% empty %}
+        <li>No gigs available at the moment.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
