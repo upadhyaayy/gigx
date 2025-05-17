@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Seeker Dashboard{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Your Favorite Gigs</h2>
+    <ul>
+        {% for gig in favorites %}
+        <li>
+            {{ gig.title }} - {{ gig.description }}
+            <a href="{% url 'gig_detail' gig.id %}">View</a>
+        </li>
+        {% empty %}
+        <li>No favorite gigs yet.</li>
+        {% endfor %}
+    </ul>
+    <h2>Your Applications</h2>
+    <ul>
+        {% for app in applications %}
+        <li>
+            {{ app.gig.title }} - Status: {{ app.status }} (Applied on {{ app.applied_at }})
+        </li>
+        {% empty %}
+        <li>No applications yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
