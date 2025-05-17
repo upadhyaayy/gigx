@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Provider Dashboard{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Your Posted Gigs</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Date Posted</th>
+            <th>Status</th>
+        </tr>
+        {% for gig in gigs %}
+        <tr>
+            <td>{{ gig.title }}</td>
+            <td>{{ gig.price }}</td>
+            <td>{{ gig.date_posted }}</td>
+            <td>{{ gig.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No gigs posted yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+{% load static %}
+{% block scripts %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
